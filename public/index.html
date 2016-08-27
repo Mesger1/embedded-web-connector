@@ -32,18 +32,59 @@
 			return decodeURIComponent(results[2].replace(/\+/g, " "));
 		}
 		var device_serial = getParameterByName("serial");
-
 		function getDeviceList(){
 			// get networks json
-			var url = "/device_list/" + device_serial;
+			var url = "/devicestatus/" + device_serial;
 			$.getJSON(url, function(data){
+				$('#type').html(data.type);
+				$('#serial').html(data.serial);
+				$('#gatewaywlan0').html(data.gatewaywlan0);
+				$('#gatewayeth0').html(data.gatewayeth0);
+				$('#ipwlan0').html(data.ipwlan0);
+				$('#ipeth0').html(data.ipeth0);
+				
 			});
 		}
 		
 		</script>
-        <body onload="javascript:getDeviceList();setInterval( getDeviceList, 10000 );">
-		    <table>
-			</table>
-			
+    <body onload="javascript:getDeviceList();setInterval( getDeviceList, 10000 );">
+		<table>
+			<tr>
+				<th class="panel-heading">Type:</th>
+				<td>
+					<span id="type"></span>
+				</td>
+			</tr>
+			<tr>
+				<th class="panel-heading">Serial:</th>
+				<td>
+					<span id="serial"></span>
+				</td>
+			</tr>
+			<tr>
+				<th class="panel-heading">gateway wlan0:</th>
+				<td>
+					<span id="gatewaywlan0"></span>
+				</td>
+			</tr>			
+			<tr>
+				<th class="panel-heading">ip wlan0:</th>
+				<td>
+					<span id="ipwlan0"></span>
+				</td>
+			</tr>
+			<tr>
+				<th class="panel-heading"> gateway eth0:</th>
+				<td>
+					<span id="gatewayeth0"></span>
+				</td>
+			</tr>
+			<tr>
+				<th class="panel-heading"> ip eth0:</th>
+				<td>
+					<span id="ipeth0"></span>
+				</td>
+			</tr>
+		</table>
 	</body>
 </html>
