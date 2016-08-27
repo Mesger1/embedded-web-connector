@@ -1,0 +1,42 @@
+{
+  "name": "embedded-web-connector",
+  "version": "0.0.1",
+  "description": "dashboard for configuring embedded devices",
+  "bin": {
+    "wifi-connector": "bin/web-connector"
+  },
+  "main": "lib/server",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "lib",
+    "public",
+    "bin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gerdmestdagh/embedded-web-connector.git"
+  },
+  "keywords": [
+    "embedded",
+    "AP",
+    "wifi",
+    "connection",
+	"web"
+  ],
+  "author": "Mestdagh Gerd <mestdagh.gerd@gmail.com> (http://gmc.be)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gerdmestdagh/embedded-web-connector/issues"
+  },
+  "homepage": "https://github.com/gerdmestdagh/embedded-web-connector#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+	"restify": "latest"
+  }
+}

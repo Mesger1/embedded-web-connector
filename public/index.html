@@ -1,0 +1,49 @@
+ <HTML>
+	<head>
+        <title>Device List</title>
+			<link rel="stylesheet" type="text/css" href="css/screen.css">
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="/css/bootstrap.min.css">
+            <!-- jQuery library -->
+            <script src="/js/jquery.min.js"></script>
+            <!-- Latest compiled JavaScript -->
+            <script src="/js/bootstrap.min.js"></script>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        </head>
+		<script src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+		var selectedNetwork;
+		var selectedSSID = "no network";
+
+		function updateUrl(){
+			if (history.pushState) {
+				var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?essid=' + selectedSSID;
+				window.history.pushState({path:newurl},'',newurl);
+			}
+		}	
+
+		function getParameterByName(name, url) {
+			if (!url) url = window.location.href;
+			name = name.replace(/[\[\]]/g, "\\$&");
+			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+				results = regex.exec(url);
+			if (!results) return null;
+			if (!results[2]) return '';
+			return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+		var device_serial = getParameterByName("serial");
+
+		function getDeviceList(){
+			// get networks json
+			var url = "/device_list/" + device_serial;
+			$.getJSON(url, function(data){
+			});
+		}
+		
+		</script>
+        <body onload="javascript:getDeviceList();setInterval( getDeviceList, 10000 );">
+		    <table>
+			</table>
+			
+	</body>
+</html>
