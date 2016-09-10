@@ -6,7 +6,7 @@ if [ "$(node --version)" == "$NODE_VERSION" ] ; then
 	echo "node version correct"
 else
 	echo "Updating node sources.list"
-	curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 fi
 
 echo "Downloading Debian Package"
