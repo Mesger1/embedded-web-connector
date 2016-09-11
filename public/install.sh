@@ -4,7 +4,8 @@ echo "**************************************************************************
 echo "*       Install Script for Embedded-Device-Connector starting ...          *"
 echo "****************************************************************************"
 
-echo "********* Step 1 checking node *********"
+echo "********* Step 1 checking node                                     *********"
+
 if [ "$(node --version)" == "$NODE_VERSION" ] ; then
 	echo "node version correct"
 else
@@ -13,7 +14,9 @@ else
 	sudo apt-get -q install nodejs
 fi
 
-echo "********* Step 2 checking prerequisites *********"
+echo "********* Step 2 checking prerequisites                            *********"
+echo "Updating apt-get"
+sudo apt-get -q update
 echo "Hostapd"
 sudo apt-get -q install hostapd
 echo "DnsMasq"
@@ -22,18 +25,28 @@ echo "Lsb-core"
 sudo apt-get -q install lsb-core
 
 
-echo "********* Step 3 installing app **********"
+echo "********* Step 3 installing app                                   **********"
 npm install https://github.com/gerdmestdagh/embedded-device-connector.git -g &>/dev/null
 
 
-echo "********* Step 4 managing service *********"
+echo "********* Step 4 managing service                                  *********"
 sudo cp /usr/lib/node_modules/embedded-device-connector/service/wifi-connector.service /etc/systemd/system/
 sudo systemctl enable wifi-connector
 sudo systemctl start wifi-connector
 
 
+SERVICE="wifi-connector";
 
-echo "****************************************************************************"
-echo "*                                 DONE!!!                                  *"
-echo "****************************************************************************"
+if ps ax | grep -v grep | grep $SERVICE > /dev/null
+then
+	echo "$SERVICE service running, everything is fine"
+	echo "****************************************************************************"
+	echo "*                                 DONE!!!                                  *"
+	echo "****************************************************************************"
 
+else
+	echo "$SERVICE service failed to start"
+	echo "****************************************************************************"
+	echo "*                                ERROR!!!                                  *"
+	echo "****************************************************************************"
+fi   
