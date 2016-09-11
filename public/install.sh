@@ -1,17 +1,39 @@
 #!/bin/bash
 NODE_VERSION="v6.3.1"
-echo "Install Script for Embedded-Device-Connector starting ..."
+echo "****************************************************************************"
+echo "*       Install Script for Embedded-Device-Connector starting ...          *"
+echo "****************************************************************************"
 
+echo "********* Step 1 checking node *********"
 if [ "$(node --version)" == "$NODE_VERSION" ] ; then
 	echo "node version correct"
 else
 	echo "Updating node sources.list"
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+	sudo apt-get -q install nodejs
 fi
 
-echo "Downloading Debian Package"
-sudo wget -q https://raw.githubusercontent.com/gerdmestdagh/embedded-device-connector/master/embedded-device-connector-1.0.deb -O embedded-device-connector.deb
-echo "Installing Debian Package"
-sudo dpkg -i embedded-device-connector.deb
-sudo apt-get -y -f install
-echo "DONE!!!"
+echo "********* Step 2 checking prerequisites *********"
+echo "Hostapd"
+sudo apt-get -q install hostapd
+echo "DnsMasq"
+sudo apt-get -q install dnsmasq
+echo "Lsb-core"
+sudo apt-get -q install lsb-core
+
+
+echo "********* Step 3 installing app **********"
+npm install https://github.com/gerdmestdagh/embedded-device-connector.git -g &>/dev/null
+
+
+echo "********* Step 4 managing service *********"
+sudo cp /usr/lib/node_modules/embedded-device-connector/service/wifi-connector.service /etc/systemd/system/
+sudo systemctl enable wifi-connector
+sudo systemctl start wifi-connector
+
+
+
+echo "****************************************************************************"
+echo "*                                 DONE!!!                                  *"
+echo "****************************************************************************"
+
