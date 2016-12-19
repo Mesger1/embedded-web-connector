@@ -26,7 +26,7 @@ sudo apt-get -q install lsb-core
 
 
 echo "********* Step 3 installing app                                   **********"
-npm install https://github.com/gerdmestdagh/embedded-device-connector.git -g &>/dev/null
+sudo npm install https://github.com/gerdmestdagh/embedded-device-connector.git -g
 
 
 echo "********* Step 4 managing service                                  *********"
