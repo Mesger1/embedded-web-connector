@@ -22,7 +22,7 @@ sudo apt-get --yes --force-yes -qq install hostapd
 echo "DnsMasq"
 sudo apt-get --yes --force-yes -qq install dnsmasq
 echo "Git"
-sudo apt-get --yes --force-yes -qq install git-all
+sudo apt-get --yes --force-yes -qq install git
 
 #echo "Lsb-core"
 #sudo apt-get -q install lsb-core
