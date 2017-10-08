@@ -11,18 +11,21 @@ if [ "$(node --version)" == "$NODE_VERSION" ] ; then
 else
 	echo "Updating node sources.list"
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-	sudo apt-get -q install nodejs
+	sudo apt-get --yes --force-yes -qq install nodejs
 fi
 
 echo "********* Step 2 checking prerequisites                            *********"
 echo "Updating apt-get"
-sudo apt-get -q update
+sudo apt-get --yes --force-yes -qq update
 echo "Hostapd"
-sudo apt-get -q install hostapd
+sudo apt-get --yes --force-yes -qq install hostapd
 echo "DnsMasq"
-sudo apt-get -q install dnsmasq
-echo "Lsb-core"
-sudo apt-get -q install lsb-core
+sudo apt-get --yes --force-yes -qq install dnsmasq
+echo "Git"
+sudo apt-get --yes --force-yes -qq install git-all
+
+#echo "Lsb-core"
+#sudo apt-get -q install lsb-core
 
 
 echo "********* Step 3 installing app                                   **********"
